@@ -12,7 +12,8 @@ const DataInputBox = (props: any) => {
   const onEnterHandler = (event: any) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      if (parseInt(inputValue) < 0) {
+      // console.log(inputValue);
+      if (parseInt(inputValue) < 0 || !Number.isFinite(parseInt(inputValue))) {
         props.getScore(0, props.id);
       } else {
         props.getScore(parseInt(inputValue), props.id);
