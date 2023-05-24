@@ -1,7 +1,7 @@
 import "./App.css";
 import DataTable from "./components/DataTable";
 import AddPlayer from "./components/AddPlayer";
-import { useState } from "react";
+import { useState} from "react";
 import { v4 as uuidv4 } from "uuid";
 import PlayerStat from "./components/PlayerStat";
 

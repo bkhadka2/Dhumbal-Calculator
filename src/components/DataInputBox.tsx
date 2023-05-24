@@ -12,9 +12,8 @@ const DataInputBox = (props: any) => {
   const onEnterHandler = (event: any) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      // console.log(inputValue);
       if (parseInt(inputValue) < 0 || !Number.isFinite(parseInt(inputValue))) {
-        props.getScore(0, props.id);
+        setInputValue("");
       } else {
         props.getScore(parseInt(inputValue), props.id);
       }
@@ -35,7 +34,7 @@ const DataInputBox = (props: any) => {
         <TextField
           id="outlined-number"
           label="Number"
-          type="number"
+          type="Number"
           InputProps={{ inputProps: { min: 0, max: 200 } }}
           InputLabelProps={{
             shrink: true,

@@ -1,3 +1,15 @@
 .container {
   margin-top: 2rem;
 }
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.danger {
+  background-color: rgb(211, 84, 69) !important;
+}
+
+.notDanger {
+  background-color: green !important;
+}

@@ -30,7 +30,8 @@ const PlayerStat = (props: any) => {
     score: obj.totalScore,
   }));
   newDataSortedData.sort((a: any, b: any) => b.score - a.score);
-  console.log(`Sorted Data: ${JSON.stringify(newDataSortedData)}`);
+
+  const lowestScore = newDataSortedData[newDataSortedData.length - 1].score;
 
   return (
     <TableContainer className={classes.container}>
@@ -47,8 +48,22 @@ const PlayerStat = (props: any) => {
         </TableHead>
         <TableBody>
           {newDataSortedData.map((obj: any) => (
-            <StyledTableRow key={obj.id}>
-              <StyledTableCell align="center" component="th" scope="row">
+            <StyledTableRow
+              key={obj.id}
+              className={
+                obj.score >= 100
+                  ? classes.danger
+                  : obj.score === lowestScore && obj.score !== 0
+                  ? classes.notDanger
+                  : ""
+              }
+            >
+              <StyledTableCell
+                align="center"
+                component="th"
+                scope="row"
+                className={classes.capitalize}
+              >
                 {obj.name}
               </StyledTableCell>
               <StyledTableCell align="center">{obj.score}</StyledTableCell>

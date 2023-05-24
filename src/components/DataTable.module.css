@@ -18,3 +18,7 @@
 .almostDanger {
   background-color: #eed202;
 }
+
+.capitalize {
+  text-transform: capitalize;
+}

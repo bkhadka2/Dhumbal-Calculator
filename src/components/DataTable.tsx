@@ -53,7 +53,7 @@ const Row = (props: { row: any; getScore: any; onDeleteHandler: any }) => {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell component="th" scope="row" className={classes.capitalize}>
           {row.playerName}
         </TableCell>
         <TableCell align="center">
