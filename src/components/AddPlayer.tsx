@@ -12,18 +12,24 @@ const AddPlayer = (props: any) => {
     setPlayerName(event.target.value);
   };
 
-  const onEnterHandler = (event: any) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
+  const handleSubmission = (event: any) => {
+    event.preventDefault();
+    if (playerName === "") {
+      setPlayerName("");
+    } else {
       props.getPlayerHandler(playerName);
       setPlayerName("");
     }
   };
 
+  const onEnterHandler = (event: any) => {
+    if (event.key === "Enter") {
+      handleSubmission(event);
+    }
+  };
+
   const onSubmitHandler = (event: any) => {
-    event.preventDefault();
-    props.getPlayerHandler(playerName);
-    setPlayerName("");
+    handleSubmission(event);
   };
 
   return (
