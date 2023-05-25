@@ -5,11 +5,11 @@ import { useState } from "react";
 const DataInputBox = (props: any) => {
   const [inputValue, setInputValue] = useState("");
 
-  const onChangeHandler = (event: any) => {
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setInputValue(event.target.value);
   };
 
-  const onEnterHandler = (event: any) => {
+  const onEnterHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter") {
       event.preventDefault();
       if (parseInt(inputValue) < 0 || !Number.isFinite(parseInt(inputValue))) {

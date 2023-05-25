@@ -8,11 +8,17 @@ import { useState } from "react";
 const AddPlayer = (props: any) => {
   const [playerName, setPlayerName] = useState("");
 
-  const onChangeHandler = (event: any) => {
+  const onChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setPlayerName(event.target.value);
   };
 
-  const handleSubmission = (event: any) => {
+  const handleSubmission = (
+    event:
+      | React.KeyboardEvent<HTMLDivElement>
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     event.preventDefault();
     if (playerName === "") {
       setPlayerName("");
@@ -22,13 +28,15 @@ const AddPlayer = (props: any) => {
     }
   };
 
-  const onEnterHandler = (event: any) => {
+  const onEnterHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter") {
       handleSubmission(event);
     }
   };
 
-  const onSubmitHandler = (event: any) => {
+  const onSubmitHandler = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     handleSubmission(event);
   };
 

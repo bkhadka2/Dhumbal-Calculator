@@ -7,6 +7,21 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import classes from "./playerStat.module.css";
 
+interface playerStatData {
+  id: string;
+  name: string;
+  score: number;
+}
+
+interface playerDataProps {
+  finalData: {
+    id?: string;
+    playerName?: string;
+    totalScore?: number;
+    history: number[];
+  }[];
+}
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -23,13 +38,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const PlayerStat = (props: any) => {
-  const newDataSortedData = props.finalData.map((obj: any) => ({
+const PlayerStat: React.FC<playerDataProps> = ({ finalData }) => {
+  const newDataSortedData = finalData.map((obj: any) => ({
     id: obj.id,
     name: obj.playerName,
     score: obj.totalScore,
   }));
-  newDataSortedData.sort((a: any, b: any) => b.score - a.score);
+  newDataSortedData.sort(
+    (a: playerStatData, b: playerStatData) => b.score - a.score
+  );
 
   const lowestScore = newDataSortedData[newDataSortedData.length - 1].score;
 
@@ -47,7 +64,7 @@ const PlayerStat = (props: any) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {newDataSortedData.map((obj: any) => (
+          {newDataSortedData.map((obj: playerStatData) => (
             <StyledTableRow
               key={obj.id}
               className={
