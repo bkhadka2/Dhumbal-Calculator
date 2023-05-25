@@ -4,14 +4,14 @@ import AddPlayer from "./components/AddPlayer";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import PlayerStat from "./components/PlayerStat";
+interface playerData {
+  id?: string;
+  playerName?: string;
+  totalScore?: number;
+  history: number[];
+}
 
 const App = () => {
-  interface playerData {
-    id?: string;
-    playerName?: string;
-    totalScore?: number;
-    history: number[];
-  }
 
   const [finalData, setFinalData] = useState<playerData[]>([]);
 
