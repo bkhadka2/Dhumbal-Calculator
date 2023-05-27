@@ -45,7 +45,7 @@ const PlayerStat: React.FC<playerDataProps> = ({ finalData }) => {
     score: obj.totalScore,
   }));
   newDataSortedData.sort(
-    (a: playerStatData, b: playerStatData) => b.score - a.score
+    (a, b) => b.score - a.score
   );
 
   const lowestScore = newDataSortedData[newDataSortedData.length - 1].score;

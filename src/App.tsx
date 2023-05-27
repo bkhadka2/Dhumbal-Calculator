@@ -11,9 +11,17 @@ interface playerData {
   history: number[];
 }
 
+// interface historyData {
+//   history: {
+//     id: string;
+//     data: number;
+//   }
+// }
+
 const App = () => {
 
   const [finalData, setFinalData] = useState<playerData[]>([]);
+  // const [history, setHistory] = useState<historyData[]>([]);
 
   const getPlayerHandler = (player: string) => {
     const data = {
@@ -35,6 +43,7 @@ const App = () => {
           }
         : obj
     );
+    // setHistory([])
     setFinalData(newScore);
   };
 

@@ -53,13 +53,13 @@ const Row = (props: { row: any; getScore: any; onDeleteHandler: any }) => {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row" className={classes.capitalize}>
+        <TableCell component="th" scope="row" className={`${classes.capitalize} ${classes.bigText}`}>
           {row.playerName}
         </TableCell>
         <TableCell align="center">
           <DataInputBox id={row.id} rowData={row} getScore={getScoreHandler} />
         </TableCell>
-        <TableCell align="center">{row.totalScore}</TableCell>
+        <TableCell align="center" className={classes.bigText}>{row.totalScore}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>

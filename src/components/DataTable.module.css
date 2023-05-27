@@ -22,3 +22,17 @@
 .capitalize {
   text-transform: capitalize;
 }
+
+
+@media screen and (min-width: 750px){
+  .bigText {
+    font-size: 2rem !important;
+    font-weight: bolder;
+  }
+}
+
+@media screen and (max-width: 750px){
+  .bigText {
+    font-weight: bolder;
+  }
+}
