@@ -11,24 +11,16 @@ interface playerData {
   history: number[];
 }
 
-// interface historyData {
-//   history: {
-//     id: string;
-//     data: number;
-//   }
-// }
-
 const App = () => {
 
   const [finalData, setFinalData] = useState<playerData[]>([]);
-  // const [history, setHistory] = useState<historyData[]>([]);
 
   const getPlayerHandler = (player: string) => {
     const data = {
       id: uuidv4(),
       playerName: player,
       totalScore: 0,
-      history: [0],
+      history: [],
     };
     setFinalData([data, ...finalData]);
   };
@@ -38,29 +30,17 @@ const App = () => {
       obj.id === id
         ? {
             ...obj,
-            history: obj.history[0] === 0 ? [score] : [score, ...obj.history],
-            totalScore: score + obj.history.reduce((a, b) => a + b),
+            history: !obj.history.length ? [score] : [score, ...obj.history],
+            totalScore: obj.history.length ? score + obj.history.reduce((a, b) => a + b): score,
           }
         : obj
     );
-    // setHistory([])
     setFinalData(newScore);
   };
 
   const deleteHandler = (id: string) => {
     const newData = finalData.filter((obj: any) => obj.id !== id);
-    if (newData.length === 0) {
-      setFinalData([
-        {
-          id: uuidv4(),
-          playerName: "",
-          totalScore: 0,
-          history: [0],
-        },
-      ]);
-    } else {
-      setFinalData(newData);
-    }
+    setFinalData(newData);
   };
 
   return (
