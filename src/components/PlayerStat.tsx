@@ -18,7 +18,11 @@ interface playerDataProps {
     id?: string;
     playerName?: string;
     totalScore?: number;
-    history: number[];
+    // history: number[];
+    history: {
+      id: string;
+      score: number;
+    }[]
   }[];
 }
 

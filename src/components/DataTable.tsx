@@ -14,13 +14,13 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import DataInputBox from "./DataInputBox";
 import classes from "./DataTable.module.css";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { pink } from "@mui/material/colors";
 import { useState } from "react";
-import { StringDecoder } from "string_decoder";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 
-const Row = (props: { row: any; getScore: any; onDeleteHandler: any }) => {
-  const { row, getScore, onDeleteHandler } = props;
+const Row = (props: { row: any; getScore: any; onDeleteHandler: any, onHistoryDeleteHandler: any  }) => {
+  const { row, getScore, onDeleteHandler, onHistoryDeleteHandler } = props;
   const [open, setOpen] = useState(false);
 
   const deleteHandler = (id: string) => {
@@ -30,6 +30,10 @@ const Row = (props: { row: any; getScore: any; onDeleteHandler: any }) => {
   const getScoreHandler = (score: number, id: string) => {
     getScore(score, id);
   };
+
+  const historyDeleteHandler = (rowId: string, historyId: string) => {
+    onHistoryDeleteHandler(rowId, historyId);
+  }
 
   let style = `${classes.hoverBody}`;
 
@@ -53,13 +57,19 @@ const Row = (props: { row: any; getScore: any; onDeleteHandler: any }) => {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row" className={`${classes.capitalize} ${classes.bigText}`}>
+        <TableCell
+          component="th"
+          scope="row"
+          className={`${classes.capitalize} ${classes.bigText}`}
+        >
           {row.playerName}
         </TableCell>
         <TableCell align="center">
           <DataInputBox id={row.id} rowData={row} getScore={getScoreHandler} />
         </TableCell>
-        <TableCell align="center" className={classes.bigText}>{row.totalScore}</TableCell>
+        <TableCell align="center" className={classes.bigText}>
+          {row.totalScore}
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
@@ -67,8 +77,8 @@ const Row = (props: { row: any; getScore: any; onDeleteHandler: any }) => {
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
                 History
-                <IconButton onClick={() => deleteHandler(row.id)}>
-                  <DeleteIcon sx={{ color: pink[500], margin: 1 }} />
+                <IconButton onClick={() => deleteHandler(row.id)} title="Delete Entire Row">
+                  <DeleteSweepIcon sx={{ color: pink[500], margin: 1 }} />
                 </IconButton>
               </Typography>
               <Table size="small">
@@ -76,10 +86,14 @@ const Row = (props: { row: any; getScore: any; onDeleteHandler: any }) => {
                   {row.history.map((historyRow: any, i: number) => (
                     <TableRow key={i}>
                       <TableCell component="th" scope="row">
-                        {historyRow}
+                        {historyRow.score}
+                        <IconButton onClick={() => {historyDeleteHandler(row.id, historyRow.id)}} title="Delete this History">
+                          <DeleteIcon sx={{ color: pink[500] }}/>
+                        </IconButton>
                       </TableCell>
                     </TableRow>
                   ))}
+                  {/* 1 */}
                 </TableBody>
               </Table>
             </Box>
@@ -91,8 +105,12 @@ const Row = (props: { row: any; getScore: any; onDeleteHandler: any }) => {
 };
 
 const DataTable = (props: any) => {
-  const deleteHandler = (id: StringDecoder) => {
+  const deleteHandler = (id: string) => {
     props.onDelete(id);
+  };
+
+  const historyDeleteHandler = (rowId: string, historyId: string) => {
+    props.onHistoryDelete(rowId, historyId);
   };
 
   return (
@@ -117,6 +135,7 @@ const DataTable = (props: any) => {
               row={row}
               getScore={props.getScore}
               onDeleteHandler={deleteHandler}
+              onHistoryDeleteHandler={historyDeleteHandler}
             />
           ))}
         </TableBody>
