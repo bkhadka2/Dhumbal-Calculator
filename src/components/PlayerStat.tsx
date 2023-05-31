@@ -57,7 +57,7 @@ const PlayerStat: React.FC<playerDataProps> = ({ finalData }) => {
   return (
     <TableContainer className={classes.container}>
       <Table
-        sx={{ maxWidth: 500 }}
+        sx={{ maxWidth: 600 }}
         aria-label="customized table"
         align="center"
       >
